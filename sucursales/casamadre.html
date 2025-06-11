@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <link rel="icon" type="image/png" href="img/favicon.png" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Casa Madre - Carta</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+  <h1>Casa Madre</h1>
+  <div class="hero-banner">¡Disfrutá la mejor comida en Casa Madre!</div>
+  <p>Elegí tus platos favoritos y finalizá tu pedido fácilmente.</p>
+
+  <div class="menu">
+    <div class="menu-item">
+      <img src="../img/pescado_frito.jpeg" alt="Pescado frito" />
+      <p>Pescado frito</p>
+      <span>$3400</span>
+      <button onclick="agregarAlCarrito('Pescado frito', 3400)">Agregar</button>
+    </div>
+    <div class="menu-item">
+      <img src="../img/tacu_tacu.jpeg" alt="Tacu tacu" />
+      <p>Tacu tacu</p>
+      <span>$3000</span>
+      <button onclick="agregarAlCarrito('Tacu tacu', 3000)">Agregar</button>
+    </div>
+    <div class="menu-item">
+      <img src="../img/mazamorra_morada.jpeg" alt="Mazamorra morada" />
+      <p>Mazamorra morada</p>
+      <span>$1800</span>
+      <button onclick="agregarAlCarrito('Mazamorra morada', 1800)">Agregar</button>
+    </div>
+  </div>
+
+  <div class="carrito">
+    <h2>Tu pedido</h2>
+    <ul id="carrito-lista"></ul>
+    <p>Total: $<span id="total-carrito">0</span></p>
+      <div class="boton-finalizar">
+  <a id="finalizar-btn" href="#" target="_blank">
+    <button>Finalizar pedido por WhatsApp</button>
+  </a>
+</div>
+  </div>
+
+  <script>
+    const carrito = [];
+
+    function agregarAlCarrito(plato, precio) {
+      carrito.push({ plato, precio });
+      renderCarrito();
+    }
+
+    function renderCarrito() {
+      const lista = document.getElementById('carrito-lista');
+      lista.innerHTML = '';
+      let total = 0;
+      carrito.forEach((item) => {
+        const li = document.createElement('li');
+        li.textContent = `${item.plato} - $${item.precio}`;
+        lista.appendChild(li);
+        total += item.precio;
+      });
+      document.getElementById('total-carrito').textContent = total;
+
+      const texto = encodeURIComponent(
+        'Hola! Quiero hacer un pedido en Tolosa:\n' +
+          carrito.map((i) => `- ${i.plato} ($${i.precio})`).join('\n') +
+          `\nTotal: $${total}`
+      );
+      document.getElementById('finalizar-btn').href = `https://wa.me/5492213091466?text=${texto}`;
+    }
+  </script>
+</body>
+</html>

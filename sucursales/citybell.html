@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <link rel="icon" type="image/png" href="img/favicon.png" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>City Bell - Carta</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+  </head>
+  <body>
+    <h1>City Bell</h1>
+    <div class="hero-banner">¡15% OFF en pedidos por WhatsApp!</div>
+    <p>Elegí tus platos favoritos y finalizá tu pedido fácilmente.</p>
+
+    <div class="menu">
+      <div class="menu-item">
+        <img src="../img/ceviche.jpg" alt="Ceviche clásico" />
+        <p>Ceviche clásico</p>
+        <span>$3500</span>
+        <button onclick="agregarAlCarrito('Ceviche clásico', 3500)">
+          Agregar
+        </button>
+      </div>
+      <div class="menu-item">
+        <img src="../img/lomo_saltado.jpg" alt="Lomo saltado" />
+        <p>Lomo saltado</p>
+        <span>$4200</span>
+        <button onclick="agregarAlCarrito('Lomo saltado', 4200)">
+          Agregar
+        </button>
+      </div>
+      <div class="menu-item">
+        <img src="../img/aji_de_gallina.jpeg" alt="Ají de gallina" />
+        <p>Ají de gallina</p>
+        <span>$3900</span>
+        <button onclick="agregarAlCarrito('Ají de gallina', 3900)">
+          Agregar
+        </button>
+      </div>
+      <!-- Más platos -->
+    </div>
+
+    <div class="carrito">
+      <h2>Tu pedido</h2>
+      <ul id="carrito-lista"></ul>
+      <p>Total: $<span id="total-carrito">0</span></p>
+      <div class="boton-finalizar">
+  <a id="finalizar-btn" href="#" target="_blank">
+    <button>Finalizar pedido por WhatsApp</button>
+  </a>
+</div>
+    </div>
+
+    <script>
+      const carrito = [];
+
+      function agregarAlCarrito(plato, precio) {
+        carrito.push({ plato, precio });
+        renderCarrito();
+      }
+
+      function renderCarrito() {
+        const lista = document.getElementById("carrito-lista");
+        lista.innerHTML = "";
+        let total = 0;
+        carrito.forEach((item) => {
+          const li = document.createElement("li");
+          li.textContent = `${item.plato} - $${item.precio}`;
+          lista.appendChild(li);
+          total += item.precio;
+        });
+        document.getElementById("total-carrito").textContent = total;
+
+         const texto = encodeURIComponent(
+        'Hola! Quiero hacer un pedido en City Bell:\n' +
+          carrito.map((i) => `- ${i.plato} ($${i.precio})`).join('\n') +
+          `\nTotal: $${total}`
+      );
+      document.getElementById('finalizar-btn').href = `https://wa.me/5492215980622?text=${texto}`;
+    }
+  </script>
+</body>
+</html>
+
+    </script>
+  </body>
+</html>

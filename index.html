@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>El Sabor Peruano</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #fff5ec;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header {
+      width: 100%;
+      background-color: #ff595e;
+      color: white;
+      padding: 1.5rem 0;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    main {
+      max-width: 1000px;
+      width: 100%;
+      padding: 2rem 1rem;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 1.5rem;
+    }
+
+    .sucursales {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .sucursal-card {
+      background-color: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.2s;
+    }
+
+    .sucursal-card:hover {
+      transform: scale(1.03);
+    }
+
+    .sucursal-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .sucursal-card h3 {
+      margin: 1rem 0 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    .sucursal-card p {
+      font-size: 0.95rem;
+      color: #666;
+      margin-bottom: 1rem;
+    }
+
+    .sucursal-card a {
+      display: inline-block;
+      margin-bottom: 1.5rem;
+      padding: 0.6rem 1.5rem;
+      background-color: #ff595e;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: background 0.3s;
+    }
+
+    .sucursal-card a:hover {
+      background-color: #e14c51;
+    }
+
+    footer {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <header>
+  <img src="img/logo.png" alt="El Sabor Peruano" class="logo" />
+  <h1>El Sabor Peruano</h1>
+</header>
+  <main>
+    <h2>Elegí tu sucursal para hacer el pedido</h2>
+    <div class="sucursales">
+      <div class="sucursal-card">
+        <img src="img/citybell.jpeg" alt="Sucursal City Bell">
+        <h3>City Bell</h3>
+        <p>Pedidos para la zona norte. Comida peruana auténtica y fresca.</p>
+        <a href="sucursales/citybell.html">Ver menú</a>
+      </div>
+      <div class="sucursal-card">
+        <img src="img/centro.jpeg" alt="Sucursal Centro">
+        <h3>Baxar</h3>
+        <p>Ubicados en el corazón de La Plata. Delicias al paso o para disfrutar en casa.</p>
+        <a href="sucursales/centro.html">Ver menú</a>
+      </div>
+      <div class="sucursal-card">
+        <img src="img/tolosa.jpeg" alt="Sucursal Tolosa">
+        <h3>Casa Madre</h3>
+        <p>Pedidos para la zona este. La mejor sazón en tu barrio.</p>
+        <a href="sucursales/casamadre.html">Ver menú</a>
+      </div>
+    </div>
+  </main>
+
+  <section class="buscador">
+  <h2>¿Dónde estás? Te ayudamos a elegir la sucursal más cercana</h2>
+  <input type="text" id="direccion" placeholder="Ingresá tu dirección" />
+  <button onclick="buscarSucursal()">Buscar sucursal</button>
+  <p id="resultado"></p>
+</section>
+
+  <footer>© 2025 El Sabor Peruano</footer>
+  <script>
+
+    window.onload = function () {
+    document.getElementById("direccion").value = "";
+  };
+  
+  const sucursales = [
+    { nombre: "City Bell", lat: -34.871194, lon: -58.111928, link: "sucursales/citybell.html" },
+    { nombre: "Centro", lat: -34.918190, lon: -57.954960, link: "sucursales/centro.html" },
+    { nombre: "Tolosa", lat: -34.916672, lon: -57.961844, link: "sucursales/tolosa.html" },
+  ];
+
+  function buscarSucursal() {
+    const direccion = document.getElementById("direccion").value;
+    const resultado = document.getElementById("resultado");
+    if (!direccion) return alert("Por favor ingresá una dirección.");
+
+    fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(direccion)}`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.length === 0) {
+          resultado.textContent = "No pudimos encontrar esa dirección.";
+          return;
+        }
+        const lat = parseFloat(data[0].lat);
+        const lon = parseFloat(data[0].lon);
+
+        let sucursalCercana = null;
+        let distanciaMinima = Infinity;
+
+        sucursales.forEach(sucursal => {
+          const d = distancia(lat, lon, sucursal.lat, sucursal.lon);
+          if (d < distanciaMinima) {
+            distanciaMinima = d;
+            sucursalCercana = sucursal;
+          }
+        });
+
+        resultado.innerHTML = `📍 Te conviene pedir en la sucursal <strong>${sucursalCercana.nombre}</strong>.  
+        <a href="${sucursalCercana.link}">Ir al menú</a>`;
+      });
+  }
+
+  function distancia(lat1, lon1, lat2, lon2) {
+    const R = 6371; // Radio de la Tierra en km
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180) * Math.cos(lat2*Math.PI/180) * Math.sin(dLon/2)**2;
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    return R * c;
+  }
+  
+</script>
+
+</body>
+</html>
