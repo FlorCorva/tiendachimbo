@@ -72,7 +72,7 @@ function finalizarPedido() {
   const numeroWA = numerosWhatsApp[sucursal];
   const url = `https://wa.me/${numeroWA}?text=${encodeURIComponent(mensaje)}`;
 
-  window.open(url, "_blank");
+  window.location.href = url;
 }
 
 // Función extra (no relacionada con carrito)
