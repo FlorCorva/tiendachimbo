@@ -1,12 +1,27 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap");
 
 body {
-  font-family: "Montserrat", sans-serif;
-  padding: 20px;
-  margin: 0;
-  background-color: #fff;
+  background: url(https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1400&q=80
+) no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+  font-family: 'Poppins', sans-serif;
   color: #333;
+  line-height: 1.6;
+  padding: 20px;
 }
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; 
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 249, 243, 0.9); /* Capa translúcida para suavizar la imagen */
+  z-index: -1;
+}
+
 
 h1 {
   font-size: 2rem;
@@ -20,17 +35,17 @@ p {
 }
 
 .sucursales {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  justify-items: center;
 }
+
 
 .sucursales a {
   display: inline-block;
   padding: 12px 20px;
-  background-color: #ff5a5f;
+  background-color: #EF3340;
   color: white;
   font-weight: bold;
   text-decoration: none;
@@ -95,7 +110,7 @@ p {
 }
 
 button {
-  background-color: #ff5a5f;
+  background-color: #EF3340;
   color: white;
   border: none;
   padding: 10px 16px;
@@ -106,7 +121,7 @@ button {
 }
 
 button:hover {
-  background-color: #e0484d;
+  background-color: #EF3340;
 }
 
 .carrito {
@@ -176,7 +191,7 @@ header {
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  background-color: #ff595e;
+  background-color: #EF3340;
   color: white;
   padding: 1.5rem;
 }
@@ -204,7 +219,7 @@ header {
 
 .buscador button {
   padding: 0.8rem 1.2rem;
-  background-color: #ff595e;
+  background-color: #EF3340;
   color: white;
   border: none;
   border-radius: 8px;
@@ -214,3 +229,71 @@ header {
   margin-left: auto;
   margin-right: auto;
 }
+
+.bienvenida {
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #fff5ec; /* color base */
+
+  background-image: url('../img/fondo.png');
+  background-repeat: repeat;
+  background-position: center;
+  background-size: 200px 200px;
+
+  /* capa extra para la transparencia sobre el patrón */
+  /* no es necesario si la imagen tiene transparencia */
+}
+
+.bienvenida-img {
+  max-width: 80%;
+  height: auto;
+  margin-bottom: 2rem;
+}
+
+.btn-pedido {
+  background-color: #ff595e;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-pedido:hover {
+  background-color: #e14c51;
+}
+
+main {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+footer {
+  width: 100%;
+  text-align: center;
+  padding: 1rem 0;
+  background-color: #ff595e; /* o el color que uses */
+  color: white;
+  position: relative; /* para que no se superponga */
+  box-sizing: border-box;
+}
+
+.footer-logo {
+  width: 50px;  /* tamaño chiquito, ajustalo a tu gusto */
+  height: auto; /* mantiene la proporción */
+}
+
+

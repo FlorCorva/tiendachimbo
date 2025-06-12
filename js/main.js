@@ -56,3 +56,7 @@ function finalizarPedido(sucursal) {
   const url = `https://wa.me/5492210000000?text=${encodeURIComponent(mensaje)}`;
   window.open(url, "_blank");
 }
+function mostrarContenido() {
+  document.getElementById("pantalla-bienvenida").style.display = "none";
+  document.getElementById("contenido-principal").style.display = "block";
+}

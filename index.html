@@ -16,6 +16,41 @@
       align-items: center;
     }
 
+    .bienvenida {
+      position: fixed;
+      z-index: 999;
+      background-color: #fff5ec;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .bienvenida-img {
+      max-width: 90%;
+      height: auto;
+      margin-bottom: 2rem;
+    }
+
+    .btn-pedido {
+      background-color: #ff595e;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .btn-pedido:hover {
+      background-color: #e14c51;
+    }
+
     header {
       width: 100%;
       background-color: #ff595e;
@@ -91,6 +126,11 @@
       background-color: #e14c51;
     }
 
+    .buscador {
+      text-align: center;
+      margin-top: 2rem;
+    }
+
     footer {
       margin-top: 2rem;
       font-size: 0.9rem;
@@ -99,95 +139,119 @@
   </style>
 </head>
 <body>
-  <header>
-  <img src="img/logo.png" alt="El Sabor Peruano" class="logo" />
-  <h1>El Sabor Peruano</h1>
-</header>
-  <main>
-    <h2>Elegí tu sucursal para hacer el pedido</h2>
-    <div class="sucursales">
-      <div class="sucursal-card">
-        <img src="img/citybell.jpeg" alt="Sucursal City Bell">
-        <h3>City Bell</h3>
-        <p>Pedidos para la zona norte. Comida peruana auténtica y fresca.</p>
-        <a href="sucursales/citybell.html">Ver menú</a>
-      </div>
-      <div class="sucursal-card">
-        <img src="img/centro.jpeg" alt="Sucursal Centro">
-        <h3>Baxar</h3>
-        <p>Ubicados en el corazón de La Plata. Delicias al paso o para disfrutar en casa.</p>
-        <a href="sucursales/centro.html">Ver menú</a>
-      </div>
-      <div class="sucursal-card">
-        <img src="img/tolosa.jpeg" alt="Sucursal Tolosa">
-        <h3>Casa Madre</h3>
-        <p>Pedidos para la zona este. La mejor sazón en tu barrio.</p>
-        <a href="sucursales/casamadre.html">Ver menú</a>
-      </div>
-    </div>
-  </main>
+  <div id="pantalla-bienvenida" class="bienvenida">
+    <img src="img/bienvenidos.png" alt="Bienvenidos Amigos" class="bienvenida-img" />
+    <button onclick="mostrarContenido()" class="btn-pedido">Hacé tu pedido</button>
+  </div>
 
-  <section class="buscador">
-  <h2>¿Dónde estás? Te ayudamos a elegir la sucursal más cercana</h2>
-  <input type="text" id="direccion" placeholder="Ingresá tu dirección" />
-  <button onclick="buscarSucursal()">Buscar sucursal</button>
-  <p id="resultado"></p>
-</section>
+  <div id="contenido-principal" style="display: none; width: 100%;">
+    <header>
+      <img src="img/logo.png" alt="El Sabor Peruano" class="logo" />
+      <h1>El Sabor Peruano</h1>
+    </header>
 
-  <footer>© 2025 El Sabor Peruano</footer>
+    <main>
+      <h2>Elegí tu sucursal para hacer el pedido</h2>
+      <div class="sucursales">
+        <div class="sucursal-card">
+          <img src="img/citybell.jpeg" alt="Sucursal City Bell">
+          <h3>City Bell</h3>
+          <p>Pedidos para la zona norte. Comida peruana auténtica y fresca.</p>
+          <a href="sucursales/citybell.html">Ver menú</a>
+        </div>
+        <div class="sucursal-card">
+          <img src="img/centro.jpeg" alt="Sucursal Centro">
+          <h3>Baxar</h3>
+          <p>Ubicados en el corazón de La Plata. Delicias al paso o para disfrutar en casa.</p>
+          <a href="sucursales/centro.html">Ver menú</a>
+        </div>
+        <div class="sucursal-card">
+          <img src="img/tolosa.jpeg" alt="Sucursal Tolosa">
+          <h3>Casa Madre</h3>
+          <p>Pedidos para la zona este. La mejor sazón en tu barrio.</p>
+          <a href="sucursales/casamadre.html">Ver menú</a>
+        </div>
+      </div>
+    </main>
+
+    <section class="buscador">
+      <h2>¿Dónde estás? Te ayudamos a elegir la sucursal más cercana</h2>
+      <input type="text" id="direccion" placeholder="Ingresá tu dirección" />
+      <button onclick="buscarSucursal()">Buscar sucursal</button>
+      <p id="resultado"></p>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <img src="img/logo.png" alt="La Chimbotana" class="footer-logo" />
+        <div class="footer-socials">
+          <a href="https://www.instagram.com/tu_usuario" target="_blank">
+            <img src="img/instagram_icon.png" alt="Instagram" />
+          </a>
+          <a href="https://www.facebook.com/tu_usuario" target="_blank">
+            <img src="img/facebook_icon.png" alt="Facebook" />
+          </a>
+        </div>
+      </div>
+      <p>© 2025 El Sabor Peruano</p>
+    </footer>
+  </div>
+
   <script>
-
     window.onload = function () {
-    document.getElementById("direccion").value = "";
-  };
-  
-  const sucursales = [
-    { nombre: "City Bell", lat: -34.871194, lon: -58.111928, link: "sucursales/citybell.html" },
-    { nombre: "Centro", lat: -34.918190, lon: -57.954960, link: "sucursales/centro.html" },
-    { nombre: "Tolosa", lat: -34.916672, lon: -57.961844, link: "sucursales/tolosa.html" },
-  ];
+      document.getElementById("direccion").value = "";
+    };
 
-  function buscarSucursal() {
-    const direccion = document.getElementById("direccion").value;
-    const resultado = document.getElementById("resultado");
-    if (!direccion) return alert("Por favor ingresá una dirección.");
+    function mostrarContenido() {
+      document.getElementById("pantalla-bienvenida").style.display = "none";
+      document.getElementById("contenido-principal").style.display = "block";
+    }
 
-    fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(direccion)}`)
-      .then(response => response.json())
-      .then(data => {
-        if (data.length === 0) {
-          resultado.textContent = "No pudimos encontrar esa dirección.";
-          return;
-        }
-        const lat = parseFloat(data[0].lat);
-        const lon = parseFloat(data[0].lon);
+    const sucursales = [
+      { nombre: "City Bell", lat: -34.871194, lon: -58.111928, link: "sucursales/citybell.html" },
+      { nombre: "Centro", lat: -34.918190, lon: -57.954960, link: "sucursales/centro.html" },
+      { nombre: "Tolosa", lat: -34.916672, lon: -57.961844, link: "sucursales/tolosa.html" },
+    ];
 
-        let sucursalCercana = null;
-        let distanciaMinima = Infinity;
+    function buscarSucursal() {
+      const direccion = document.getElementById("direccion").value;
+      const resultado = document.getElementById("resultado");
+      if (!direccion) return alert("Por favor ingresá una dirección.");
 
-        sucursales.forEach(sucursal => {
-          const d = distancia(lat, lon, sucursal.lat, sucursal.lon);
-          if (d < distanciaMinima) {
-            distanciaMinima = d;
-            sucursalCercana = sucursal;
+      fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(direccion)}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.length === 0) {
+            resultado.textContent = "No pudimos encontrar esa dirección.";
+            return;
           }
+          const lat = parseFloat(data[0].lat);
+          const lon = parseFloat(data[0].lon);
+
+          let sucursalCercana = null;
+          let distanciaMinima = Infinity;
+
+          sucursales.forEach(sucursal => {
+            const d = distancia(lat, lon, sucursal.lat, sucursal.lon);
+            if (d < distanciaMinima) {
+              distanciaMinima = d;
+              sucursalCercana = sucursal;
+            }
+          });
+
+          resultado.innerHTML = `📍 Te conviene pedir en la sucursal <strong>${sucursalCercana.nombre}</strong>.  
+          <a href="${sucursalCercana.link}">Ir al menú</a>`;
         });
+    }
 
-        resultado.innerHTML = `📍 Te conviene pedir en la sucursal <strong>${sucursalCercana.nombre}</strong>.  
-        <a href="${sucursalCercana.link}">Ir al menú</a>`;
-      });
-  }
-
-  function distancia(lat1, lon1, lat2, lon2) {
-    const R = 6371; // Radio de la Tierra en km
-    const dLat = (lat2 - lat1) * Math.PI / 180;
-    const dLon = (lon2 - lon1) * Math.PI / 180;
-    const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180) * Math.cos(lat2*Math.PI/180) * Math.sin(dLon/2)**2;
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-    return R * c;
-  }
-  
-</script>
-
+    function distancia(lat1, lon1, lat2, lon2) {
+      const R = 6371; // Radio de la Tierra en km
+      const dLat = (lat2 - lat1) * Math.PI / 180;
+      const dLon = (lon2 - lon1) * Math.PI / 180;
+      const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180) * Math.cos(lat2*Math.PI/180) * Math.sin(dLon/2)**2;
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+      return R * c;
+    }
+  </script>
 </body>
 </html>
