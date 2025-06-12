@@ -155,7 +155,7 @@ button:hover {
 }
 
 .boton-finalizar button {
-  background-color: #25d366;
+  background-color: #14522b;
   color: white;
   border: none;
   padding: 0.8rem 1.5rem;
@@ -166,7 +166,7 @@ button:hover {
 }
 
 .boton-finalizar button:hover {
-  background-color: #1ebc59;
+  background-color: #14522b;
 }
 
 @keyframes fadeInUp {
