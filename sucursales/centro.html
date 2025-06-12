@@ -17,19 +17,19 @@
       <img src="../img/anticuchos.jpeg" alt="Anticuchos" />
       <p>Anticuchos</p>
       <span>$3200</span>
-      <button onclick="agregarAlCarrito('Anticuchos', 3200)">Agregar</button>
+      <button type="button" onclick="agregarAlCarrito('Anticuchos', 3200)">Agregar</button>
     </div>
     <div class="menu-item">
       <img src="../img/causa_limeña.jpeg" alt="Causa limeña" />
       <p>Causa limeña</p>
       <span>$2800</span>
-      <button onclick="agregarAlCarrito('Causa limeña', 2800)">Agregar</button>
+      <button type="button" onclick="agregarAlCarrito('Causa limeña', 2800)">Agregar</button>
     </div>
     <div class="menu-item">
       <img src="../img/pollo_a_la_bruscada.jpeg" alt="Pollo a la bruscada" />
       <p>Pollo a la bruscada</p>
       <span>$3500</span>
-      <button onclick="agregarAlCarrito('Pollo a la bruscada', 3500)">Agregar</button>
+      <button type="button" onclick="agregarAlCarrito('Pollo a la bruscada', 3500)">Agregar</button>
     </div>
   </div>
 
@@ -37,40 +37,16 @@
     <h2>Tu pedido</h2>
     <ul id="carrito-lista"></ul>
     <p>Total: $<span id="total-carrito">0</span></p>
-      <div class="boton-finalizar">
-  <a id="finalizar-btn" href="#" target="_blank">
-    <button>Finalizar pedido por WhatsApp</button>
-  </a>
-</div>
+    <div class="boton-finalizar">
+      <button type="button" id="finalizar-btn">Finalizar pedido</button>
+    </div>
   </div>
 
+  <script src="../js/main.js"></script>
   <script>
-    const carrito = [];
-
-    function agregarAlCarrito(plato, precio) {
-      carrito.push({ plato, precio });
-      renderCarrito();
-    }
-
-    function renderCarrito() {
-      const lista = document.getElementById('carrito-lista');
-      lista.innerHTML = '';
-      let total = 0;
-      carrito.forEach((item) => {
-        const li = document.createElement('li');
-        li.textContent = `${item.plato} - $${item.precio}`;
-        lista.appendChild(li);
-        total += item.precio;
-      });
-      document.getElementById('total-carrito').textContent = total;
-
-      const texto = encodeURIComponent(
-        'Hola! Quiero hacer un pedido en Centro:\n' +
-          carrito.map((i) => `- ${i.plato} ($${i.precio})`).join('\n') +
-          `\nTotal: $${total}`
-      );
-      document.getElementById('finalizar-btn').href = `https://wa.me/5492216815851?text=${texto}`;
-    }
+    document.getElementById("finalizar-btn").addEventListener("click", function () {
+      finalizarPedido("Baxar");
+    });
   </script>
 </body>
 </html>
