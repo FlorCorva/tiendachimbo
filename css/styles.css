@@ -37,6 +37,10 @@ p {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
   justify-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .sucursales a {
@@ -48,10 +52,30 @@ p {
   text-decoration: none;
   border-radius: 8px;
   transition: background-color 0.2s;
+  width: 100%;
+  max-width: 300px;
+  text-align: center;
 }
 
 .sucursales a:hover {
   background-color: #e0484d;
+}
+
+@media (max-width: 600px) {
+  .sucursales {
+    grid-template-columns: 1fr;
+    justify-items: stretch;
+  }
+
+  .sucursales a {
+    width: 100%;
+  }
+}
+
+body {
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .hero-banner {
