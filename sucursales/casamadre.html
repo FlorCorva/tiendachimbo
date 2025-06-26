@@ -6,31 +6,49 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Casa Madre - Carta</title>
   <link rel="stylesheet" href="../css/styles.css" />
+  <style>
+    .menu-selector {
+      text-align: center;
+      margin: 1rem 0;
+    }
+    .menu-item {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .menu-item img {
+      max-width: 200px;
+      border-radius: 8px;
+    }
+    .menu-item .desc {
+      font-size: 0.9rem;
+      color: #555;
+    }
+  </style>
 </head>
 <body>
   <h1>Casa Madre</h1>
   <div class="hero-banner">¡Disfrutá la mejor comida en Casa Madre!</div>
   <p>Elegí tus platos favoritos y finalizá tu pedido fácilmente.</p>
 
-  <div class="menu">
-    <div class="menu-item">
-      <img src="../img/pescado_frito.jpeg" alt="Pescado frito" />
-      <p>Pescado frito</p>
-      <span>$3400</span>
-      <button type="button" onclick="agregarAlCarrito('Pescado frito', 3400)">Agregar</button>
-    </div>
-    <div class="menu-item">
-      <img src="../img/tacu_tacu.jpeg" alt="Tacu tacu" />
-      <p>Tacu tacu</p>
-      <span>$3000</span>
-      <button type="button" onclick="agregarAlCarrito('Tacu tacu', 3000)">Agregar</button>
-    </div>
-    <div class="menu-item">
-      <img src="../img/mazamorra_morada.jpeg" alt="Mazamorra morada" />
-      <p>Mazamorra morada</p>
-      <span>$1800</span>
-      <button type="button" onclick="agregarAlCarrito('Mazamorra morada', 1800)">Agregar</button>
-    </div>
+  <div class="menu-selector">
+    <label for="categoria">Categoría:</label>
+    <select id="categoria" onchange="cargarSubgrupos()">
+      <option value="">Seleccioná...</option>
+      <option value="comida">Comida</option>
+      <option value="bebidas">Bebidas</option>
+      <option value="pisco">Pisco</option>
+    </select>
+
+    <select id="subgrupo" onchange="mostrarProductos()" style="display: none;">
+      <option value="">Seleccioná subgrupo...</option>
+    </select>
+  </div>
+
+  <div class="menu" id="menu">
+    <!-- Los productos se cargan dinámicamente -->
   </div>
 
   <div class="carrito">
@@ -38,13 +56,82 @@
     <ul id="carrito-lista"></ul>
     <p>Total: $<span id="total-carrito">0</span></p>
     <div class="boton-finalizar">
-    <div class="boton-finalizar">
-  <button type="button" id="finalizar-btn">Finalizar pedido</button>
-</div>
-
+      <button type="button" id="finalizar-btn">Finalizar pedido</button>
     </div>
   </div>
 
   <script src="../js/main.js"></script>
+  <script>
+    const productos = {
+      comida: {
+        "Ceviches": [
+          { nombre: "Ceviche clásico", precio: 3700, img: "../img/ceviche.jpg", descripcion: "Pesca fresca en leche de tigre, camote glaseado y cancha peruana." }
+        ],
+        "Platos Calientes": [
+          { nombre: "Pescado frito", precio: 3400, img: "../img/pescado_frito.jpeg", descripcion: "Pesca del día frita al punto." },
+          { nombre: "Tacu tacu", precio: 3000, img: "../img/tacu_tacu.jpeg", descripcion: "Clásico tacu tacu de porotos y arroz acompañado de salsa criolla." }
+        ],
+        "Postres": [
+          { nombre: "Mazamorra morada", precio: 1800, img: "../img/mazamorra_morada.jpeg", descripcion: "Postre tradicional a base de maíz morado." }
+        ]
+      },
+      bebidas: {
+        "Gaseosas": [
+          { nombre: "Inca Kola", precio: 1000, img: "../img/incakola.jpg", descripcion: "Gaseosa peruana original." }
+        ]
+      },
+      pisco: {
+        "Cócteles": [
+          { nombre: "Pisco Sour", precio: 2600, img: "../img/pisco_sour.jpg", descripcion: "Pisco Sour clásico peruano." }
+        ]
+      }
+    };
+
+    function cargarSubgrupos() {
+      const cat = document.getElementById("categoria").value;
+      const sub = document.getElementById("subgrupo");
+      sub.innerHTML = '<option value="">Seleccioná subgrupo...</option>';
+
+      if (cat && productos[cat]) {
+        Object.keys(productos[cat]).forEach(sg => {
+          const o = document.createElement("option");
+          o.value = sg;
+          o.textContent = sg;
+          sub.appendChild(o);
+        });
+        sub.style.display = "inline-block";
+      } else {
+        sub.style.display = "none";
+      }
+
+      document.getElementById("menu").innerHTML = "";
+    }
+
+    function mostrarProductos() {
+      const cat = document.getElementById("categoria").value;
+      const sub = document.getElementById("subgrupo").value;
+      const menuDiv = document.getElementById("menu");
+      menuDiv.innerHTML = "";
+
+      if (cat && sub && productos[cat][sub]) {
+        productos[cat][sub].forEach(p => {
+          const item = document.createElement("div");
+          item.className = "menu-item";
+          item.innerHTML = `
+            <img src="${p.img}" alt="${p.nombre}" />
+            <p>${p.nombre}</p>
+            <div class="desc">${p.descripcion}</div>
+            <span>$${p.precio}</span>
+            <button type="button" onclick="agregarAlCarrito('${p.nombre}', ${p.precio})">Agregar</button>
+          `;
+          menuDiv.appendChild(item);
+        });
+      }
+    }
+
+    document.getElementById("finalizar-btn").addEventListener("click", function () {
+      finalizarPedido("Casa Madre");
+    });
+  </script>
 </body>
 </html>

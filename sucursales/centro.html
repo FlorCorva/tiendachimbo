@@ -1,36 +1,59 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <link rel="icon" type="image/png" href="img/favicon.png" />
+  <link rel="icon" type="image/png" href="../img/favicon.png" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Baxar - Carta</title>
   <link rel="stylesheet" href="../css/styles.css" />
+  <style>
+    .menu-selector {
+      margin: 1rem 0;
+      text-align: center;
+    }
+    .menu-item {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .menu-item img {
+      width: 100%;
+      max-width: 200px;
+      border-radius: 8px;
+    }
+    .menu-item p {
+      font-weight: bold;
+      margin: 0.5rem 0 0.2rem;
+    }
+    .menu-item .desc {
+      font-size: 0.9rem;
+      color: #555;
+    }
+  </style>
 </head>
 <body>
   <h1>Baxar</h1>
   <div class="hero-banner">¡Promoción especial para Baxar!</div>
   <p>Elegí tus platos favoritos y finalizá tu pedido fácilmente.</p>
 
-  <div class="menu">
-    <div class="menu-item">
-      <img src="../img/anticuchos.jpeg" alt="Anticuchos" />
-      <p>Anticuchos</p>
-      <span>$3200</span>
-      <button type="button" onclick="agregarAlCarrito('Anticuchos', 3200)">Agregar</button>
-    </div>
-    <div class="menu-item">
-      <img src="../img/causa_limeña.jpeg" alt="Causa limeña" />
-      <p>Causa limeña</p>
-      <span>$2800</span>
-      <button type="button" onclick="agregarAlCarrito('Causa limeña', 2800)">Agregar</button>
-    </div>
-    <div class="menu-item">
-      <img src="../img/pollo_a_la_bruscada.jpeg" alt="Pollo a la bruscada" />
-      <p>Pollo a la bruscada</p>
-      <span>$3500</span>
-      <button type="button" onclick="agregarAlCarrito('Pollo a la bruscada', 3500)">Agregar</button>
-    </div>
+  <div class="menu-selector">
+    <label for="categoria">Categoría:</label>
+    <select id="categoria" onchange="cargarSubgrupos()">
+      <option value="">Seleccioná...</option>
+      <option value="comida">Comida</option>
+      <option value="bebidas">Bebidas</option>
+      <option value="pisco">Pisco</option>
+    </select>
+
+    <select id="subgrupo" onchange="mostrarProductos()" style="display:none;">
+      <option value="">Seleccioná subgrupo...</option>
+    </select>
+  </div>
+
+  <div class="menu" id="menu">
+    <!-- Aquí se carga el menú dinámico -->
   </div>
 
   <div class="carrito">
@@ -44,6 +67,161 @@
 
   <script src="../js/main.js"></script>
   <script>
+    const productos = {
+      comida: {
+        "Ceviches": [
+          {
+            nombre: "Ceviche de salmón",
+            precio: 3600,
+            img: "../img/ceviche.jpg",
+            descripcion: "Pesca fresca cortada a cuchillo, en leche de tigre, acompañado de camote glaseado y cancha peruana."
+          },
+          {
+            nombre: "Ceviche de lenguado",
+            precio: 3800,
+            img: "../img/ceviche_mixto.jpeg",
+            descripcion: "Combinación de pesca fresca y mariscos en leche de tigre."
+          },
+          {
+            nombre: "Ceviche mixto",
+            precio: 3800,
+            img: "../img/ceviche_mixto.jpeg",
+            descripcion: "Combinación de pesca fresca y mariscos en leche de tigre."
+          },
+          {
+            nombre: "Ceviche de lenguado y langostino",
+            precio: 3800,
+            img: "../img/ceviche_mixto.jpeg",
+            descripcion: "Combinación de pesca fresca y mariscos en leche de tigre."
+          },
+          {
+            nombre: "Ceviche carretillero",
+            precio: 3800,
+            img: "../img/ceviche_mixto.jpeg",
+            descripcion: "Rebozados de rabas, tentáculos y langostinos"
+          }
+        ],
+        "Tiraditos": [
+          {
+            nombre: "Salmón con maracuyá",
+            precio: 3500,
+            img: "../img/tiradito.jpeg",
+            descripcion: "Sashimi de pesca fresca bañado en limón, ají amarillo y marachuyá acompañado de chalca criolla, cancha, choclo y palta."
+          },
+          {
+            nombre: "Salmón ahumado estilo nikkei",
+            precio: 3500,
+            img: "../img/tiradito.jpeg",
+            descripcion: "Sashimi de pesca fresca bañado en limón, ají amarillo y marachuyá acompañado de chalca criolla, cancha, choclo y palta."
+          }
+        ],
+        "Causas limeñas": [
+          {
+            nombre: "Pollo",
+            precio: 3500,
+            img: "../img/causa.jpg",
+            descripcion: "Papa amarilla con ají amarillo, limón, rellena con palta, tomate, huevo, bañada en salsa huancaina y aceitunas."
+          },
+          {
+            nombre: "Langostinos",
+            precio: 3500,
+            img: "../img/causa.jpg",
+            descripcion: "Papa amarilla con ají amarillo, limón, rellena con palta, tomate, huevo, bañada en salsa huancaina y aceitunas."
+          },
+          {
+            nombre: "Atún",
+            precio: 3500,
+            img: "../img/causa.jpg",
+            descripcion: "Papa amarilla con ají amarillo, limón, rellena con palta, tomate, huevo, bañada en salsa huancaina y aceitunas."
+          },
+          {
+            nombre: "Acevichada",
+            precio: 3500,
+            img: "../img/causa.jpg",
+            descripcion: "Papa amarilla con ají amarillo, limón, rellena con palta, tomate, huevo, bañada en salsa huancaina y aceitunas."
+          }
+        ],
+        "Ensalada Fresca": [
+        {
+            nombre: "Ensalada de mar",
+            precio: 3500,
+            img: "../img/causa.jpg",
+            descripcion: "Mix de lechuga, rúcula, tomates cherry, aros de cebolla acompañados de rabas  y langostinos en salsa nikkei."
+          }
+      ]
+      },
+      bebidas: {
+        "Cervezas": [
+          {
+            nombre: "Cusqueña",
+            precio: 1500,
+            img: "../img/cusquena.jpg",
+            descripcion: "Cerveza peruana premium."
+          }
+        ],
+        "Limonadas": [
+          {
+            nombre: "Limonada clásica",
+            precio: 1200,
+            img: "../img/limonada.jpg",
+            descripcion: "Refrescante limonada natural."
+          }
+        ]
+      },
+      pisco: {
+        "Cócteles": [
+          {
+            nombre: "Pisco Sour",
+            precio: 2500,
+            img: "../img/pisco_sour.jpg",
+            descripcion: "Clásico cóctel peruano de pisco, limón y clara de huevo."
+          }
+        ]
+      }
+    };
+
+    function cargarSubgrupos() {
+      const categoria = document.getElementById("categoria").value;
+      const subgrupoSelect = document.getElementById("subgrupo");
+      subgrupoSelect.innerHTML = '<option value="">Seleccioná subgrupo...</option>';
+
+      if (categoria && productos[categoria]) {
+        Object.keys(productos[categoria]).forEach(sub => {
+          const opt = document.createElement("option");
+          opt.value = sub;
+          opt.textContent = sub;
+          subgrupoSelect.appendChild(opt);
+        });
+        subgrupoSelect.style.display = "inline-block";
+      } else {
+        subgrupoSelect.style.display = "none";
+      }
+
+      document.getElementById("menu").innerHTML = "";
+    }
+
+    function mostrarProductos() {
+      const categoria = document.getElementById("categoria").value;
+      const subgrupo = document.getElementById("subgrupo").value;
+      const menuDiv = document.getElementById("menu");
+      menuDiv.innerHTML = "";
+
+      if (categoria && subgrupo && productos[categoria][subgrupo]) {
+        productos[categoria][subgrupo].forEach(p => {
+          const item = document.createElement("div");
+          item.className = "menu-item";
+          item.innerHTML = `
+            <img src="${p.img}" alt="${p.nombre}" />
+            <p>${p.nombre}</p>
+            <div class="desc">${p.descripcion}</div>
+            <span>$${p.precio}</span>
+            <button type="button" onclick="agregarAlCarrito('${p.nombre}', ${p.precio})">Agregar</button>
+          `;
+          menuDiv.appendChild(item);
+        });
+      }
+    }
+
     document.getElementById("finalizar-btn").addEventListener("click", function () {
       finalizarPedido("Baxar");
     });
