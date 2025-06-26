@@ -62,27 +62,115 @@
 
   <script src="../js/main.js"></script>
   <script>
-    const productos = {
+      const productos = {
       comida: {
         "Ceviches": [
-          { nombre: "Ceviche clásico", precio: 3700, img: "../img/ceviche.jpg", descripcion: "Pesca fresca en leche de tigre, camote glaseado y cancha peruana." }
+          {
+            nombre: "Ceviche de salmón",
+            precio: 3600,
+            img: "../img/ceviche.jpg",
+            descripcion: "Pesca fresca cortada a cuchillo, en leche de tigre, acompañado de camote glaseado y cancha peruana."
+          },
+          {
+            nombre: "Ceviche de lenguado",
+            precio: 3800,
+            img: "../img/ceviche_mixto.jpeg",
+            descripcion: "Combinación de pesca fresca y mariscos en leche de tigre."
+          },
+          {
+            nombre: "Ceviche mixto",
+            precio: 3800,
+            img: "../img/ceviche_mixto.jpeg",
+            descripcion: "Combinación de pesca fresca y mariscos en leche de tigre."
+          },
+          {
+            nombre: "Ceviche de lenguado y langostino",
+            precio: 3800,
+            img: "../img/ceviche_mixto.jpeg",
+            descripcion: "Combinación de pesca fresca y mariscos en leche de tigre."
+          },
+          {
+            nombre: "Ceviche carretillero",
+            precio: 3800,
+            img: "../img/ceviche_mixto.jpeg",
+            descripcion: "Rebozados de rabas, tentáculos y langostinos"
+          }
         ],
-        "Platos Calientes": [
-          { nombre: "Pescado frito", precio: 3400, img: "../img/pescado_frito.jpeg", descripcion: "Pesca del día frita al punto." },
-          { nombre: "Tacu tacu", precio: 3000, img: "../img/tacu_tacu.jpeg", descripcion: "Clásico tacu tacu de porotos y arroz acompañado de salsa criolla." }
+        "Tiraditos": [
+          {
+            nombre: "Salmón con maracuyá",
+            precio: 3500,
+            img: "../img/tiradito.jpeg",
+            descripcion: "Sashimi de pesca fresca bañado en limón, ají amarillo y marachuyá acompañado de chalca criolla, cancha, choclo y palta."
+          },
+          {
+            nombre: "Salmón ahumado estilo nikkei",
+            precio: 3500,
+            img: "../img/tiradito.jpeg",
+            descripcion: "Sashimi de pesca fresca bañado en limón, ají amarillo y marachuyá acompañado de chalca criolla, cancha, choclo y palta."
+          }
         ],
-        "Postres": [
-          { nombre: "Mazamorra morada", precio: 1800, img: "../img/mazamorra_morada.jpeg", descripcion: "Postre tradicional a base de maíz morado." }
-        ]
+        "Causas limeñas": [
+          {
+            nombre: "Pollo",
+            precio: 3500,
+            img: "../img/causa.jpg",
+            descripcion: "Papa amarilla con ají amarillo, limón, rellena con palta, tomate, huevo, bañada en salsa huancaina y aceitunas."
+          },
+          {
+            nombre: "Langostinos",
+            precio: 3500,
+            img: "../img/causa.jpg",
+            descripcion: "Papa amarilla con ají amarillo, limón, rellena con palta, tomate, huevo, bañada en salsa huancaina y aceitunas."
+          },
+          {
+            nombre: "Atún",
+            precio: 3500,
+            img: "../img/causa.jpg",
+            descripcion: "Papa amarilla con ají amarillo, limón, rellena con palta, tomate, huevo, bañada en salsa huancaina y aceitunas."
+          },
+          {
+            nombre: "Acevichada",
+            precio: 3500,
+            img: "../img/causa.jpg",
+            descripcion: "Papa amarilla con ají amarillo, limón, rellena con palta, tomate, huevo, bañada en salsa huancaina y aceitunas."
+          }
+        ],
+        "Ensalada Fresca": [
+        {
+            nombre: "Ensalada de mar",
+            precio: 3500,
+            img: "../img/causa.jpg",
+            descripcion: "Mix de lechuga, rúcula, tomates cherry, aros de cebolla acompañados de rabas  y langostinos en salsa nikkei."
+          }
+      ]
       },
       bebidas: {
-        "Gaseosas": [
-          { nombre: "Inca Kola", precio: 1000, img: "../img/incakola.jpg", descripcion: "Gaseosa peruana original." }
+        "Cervezas": [
+          {
+            nombre: "Cusqueña",
+            precio: 1500,
+            img: "../img/cusquena.jpg",
+            descripcion: "Cerveza peruana premium."
+          }
+        ],
+        "Limonadas": [
+          {
+            nombre: "Limonada clásica",
+            precio: 1200,
+            img: "../img/limonada.jpg",
+            descripcion: "Refrescante limonada natural."
+          }
         ]
       },
       pisco: {
         "Cócteles": [
-          { nombre: "Pisco Sour", precio: 2600, img: "../img/pisco_sour.jpg", descripcion: "Pisco Sour clásico peruano." }
+          {
+            nombre: "Pisco Sour",
+            precio: 2500,
+            img: "../img/pisco_sour.jpg",
+            descripcion: "Clásico cóctel peruano de pisco, limón y clara de huevo."
+          }
         ]
       }
     };
