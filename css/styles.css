@@ -55,6 +55,8 @@ p {
   width: 100%;
   max-width: 300px;
   text-align: center;
+  margin: 0 auto; /* para centrar en bloque */
+  box-sizing: border-box;
 }
 
 .sucursales a:hover {
@@ -64,11 +66,16 @@ p {
 @media (max-width: 600px) {
   .sucursales {
     grid-template-columns: 1fr;
-    justify-items: stretch;
+    justify-items: center; /* cambia stretch por center */
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    max-width: 400px;
+    margin: 0 auto;
   }
 
   .sucursales a {
     width: 100%;
+    max-width: 350px;
   }
 }
 
