@@ -1,145 +1,97 @@
-import { useState, useEffect } from "react";
-import {
-  collection,
-  getDocs,
-  doc,
-  updateDoc,
-} from "firebase/firestore";
+import { useEffect, useState } from "react";
 import { db } from "./firebase";
+import { collection, getDocs, updateDoc, doc } from "firebase/firestore";
 
-type Producto = {
-  id: string;
-  nombre: string;
+type ProductoPlano = {
+  idCategoria: string; // ej: "ceviches"
+  nombre: string; // ej: "chimbotana"
   precio: number;
 };
 
-type Sucursal = {
-  id: string;
-  nombre: string;
-  productos: Producto[];
-};
-
-const sucursalesData: Sucursal[] = [
-  { id: "citybell", nombre: "City Bell", productos: [] },
-  { id: "local2", nombre: "Sucursal 2", productos: [] },
-  { id: "local3", nombre: "Sucursal 3", productos: [] },
-];
+const sucursales = ["city bell", "centro", "casa madre"];
 
 export default function App() {
-  const [sucursales, setSucursales] = useState<Sucursal[]>(sucursalesData);
-  const [sucursalSeleccionada, setSucursalSeleccionada] = useState<string>(
-    sucursalesData[0].id
-  );
-  const [loading, setLoading] = useState<boolean>(false);
+  const [sucursal, setSucursal] = useState("city bell");
+  const [productos, setProductos] = useState<ProductoPlano[]>([]);
 
-  // Cargar productos de Firestore al cambiar sucursal
   useEffect(() => {
-    async function cargarProductos() {
-      setLoading(true);
-      try {
-        const productosRef = collection(
-          db,
-          "sucursales",
-          sucursalSeleccionada,
-          "productos"
-        );
-        const snapshot = await getDocs(productosRef);
-        const productos: Producto[] = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...(doc.data() as Omit<Producto, "id">),
-        }));
-        setSucursales((prev) =>
-          prev.map((suc) =>
-            suc.id === sucursalSeleccionada ? { ...suc, productos } : suc
-          )
-        );
-      } catch (error) {
-        console.error("Error cargando productos:", error);
-      }
-      setLoading(false);
-    }
-    cargarProductos();
-  }, [sucursalSeleccionada]);
+    const fetchProductos = async () => {
+      const colRef = collection(db, sucursal);
+      const docsSnap = await getDocs(colRef);
 
-  // Función para cambiar precio localmente y en Firestore
-  const cambiarPrecio = async (productoId: string, nuevoPrecio: number) => {
-    setSucursales((prev) =>
-      prev.map((suc) =>
-        suc.id === sucursalSeleccionada
-          ? {
-              ...suc,
-              productos: suc.productos.map((p) =>
-                p.id === productoId ? { ...p, precio: nuevoPrecio } : p
-              ),
-            }
-          : suc
+      const productosPlano: ProductoPlano[] = [];
+
+      for (const docSnap of docsSnap.docs) {
+        const categoria = docSnap.id;
+        const data = docSnap.data(); // contiene los productos como campos
+
+        Object.entries(data).forEach(([nombre, precio]) => {
+          productosPlano.push({
+            idCategoria: categoria,
+            nombre,
+            precio: Number(precio),
+          });
+        });
+      }
+
+      setProductos(productosPlano);
+    };
+
+    fetchProductos();
+  }, [sucursal]);
+
+  const cambiarPrecio = async (
+    idCategoria: string,
+    nombreProducto: string,
+    nuevoPrecio: number
+  ) => {
+    const docRef = doc(db, sucursal, idCategoria);
+    await updateDoc(docRef, {
+      [nombreProducto]: nuevoPrecio,
+    });
+
+    setProductos((prev) =>
+      prev.map((p) =>
+        p.idCategoria === idCategoria && p.nombre === nombreProducto
+          ? { ...p, precio: nuevoPrecio }
+          : p
       )
     );
-
-    // Actualizar en Firestore
-    try {
-      const productoDocRef = doc(
-        db,
-        "sucursales",
-        sucursalSeleccionada,
-        "productos",
-        productoId
-      );
-      await updateDoc(productoDocRef, { precio: nuevoPrecio });
-    } catch (error) {
-      console.error("Error actualizando precio:", error);
-    }
   };
 
-  const sucursalActual = sucursales.find((s) => s.id === sucursalSeleccionada);
-
   return (
-    <div style={{ padding: 20, fontFamily: "Arial, sans-serif" }}>
-      <h1>Panel de Precios</h1>
+    <div style={{ padding: 20 }}>
+      <h1>Editar precios - {sucursal}</h1>
 
       <label>
-        Elegir Sucursal:{" "}
-        <select
-          value={sucursalSeleccionada}
-          onChange={(e) => setSucursalSeleccionada(e.target.value)}
-        >
-          {sucursales.map((suc) => (
-            <option key={suc.id} value={suc.id}>
-              {suc.nombre}
+        Elegí sucursal:
+        <select value={sucursal} onChange={(e) => setSucursal(e.target.value)}>
+          {sucursales.map((s) => (
+            <option key={s} value={s}>
+              {s}
             </option>
           ))}
         </select>
       </label>
 
-      {loading && <p>Cargando productos...</p>}
-
-      <div style={{ marginTop: 20 }}>
-        {sucursalActual?.productos.map((producto) => (
-          <div
-            key={producto.id}
-            style={{
-              marginBottom: 15,
-              borderBottom: "1px solid #ccc",
-              paddingBottom: 10,
-            }}
-          >
-            <strong>{producto.nombre}</strong>
-            <br />
-            Precio:{" "}
+      <div>
+        {productos.map((producto) => (
+          <div key={`${producto.idCategoria}-${producto.nombre}`} style={{ marginBottom: 10 }}>
+            <strong>{producto.nombre}</strong> ({producto.idCategoria}):{" "}
             <input
               type="number"
               value={producto.precio}
-              min={0}
               onChange={(e) =>
-                cambiarPrecio(producto.id, Number(e.target.value))
+                cambiarPrecio(
+                  producto.idCategoria,
+                  producto.nombre,
+                  Number(e.target.value)
+                )
               }
               style={{ width: 100 }}
             />
           </div>
         ))}
-        {!loading && sucursalActual?.productos.length === 0 && (
-          <p>No hay productos para esta sucursal.</p>
-        )}
       </div>
     </div>
   );

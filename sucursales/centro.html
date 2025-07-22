@@ -1,31 +1,26 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <link rel="icon" type="image/png" href="../img/favicon.png" />
+  <link rel="icon" type="image/png" href="img/favicon.png" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Baxar - Carta</title>
+  <title>Casa Madre - Carta</title>
   <link rel="stylesheet" href="../css/styles.css" />
   <style>
     .menu-selector {
-      margin: 1rem 0;
       text-align: center;
+      margin: 1rem 0;
     }
     .menu-item {
       border: 1px solid #ddd;
       border-radius: 8px;
       padding: 1rem;
-      text-align: center;
       margin-bottom: 1rem;
+      text-align: center;
     }
     .menu-item img {
-      width: 100%;
       max-width: 200px;
       border-radius: 8px;
-    }
-    .menu-item p {
-      font-weight: bold;
-      margin: 0.5rem 0 0.2rem;
     }
     .menu-item .desc {
       font-size: 0.9rem;
@@ -34,8 +29,8 @@
   </style>
 </head>
 <body>
-  <h1>Baxar</h1>
-  <div class="hero-banner">¡Promoción especial para Baxar!</div>
+  <h1>Casa Madre</h1>
+  <div class="hero-banner">¡Disfrutá la mejor comida en Casa Madre!</div>
   <p>Elegí tus platos favoritos y finalizá tu pedido fácilmente.</p>
 
   <div class="menu-selector">
@@ -47,13 +42,13 @@
       <option value="pisco">Pisco</option>
     </select>
 
-    <select id="subgrupo" onchange="mostrarProductos()" style="display:none;">
+    <select id="subgrupo" onchange="mostrarProductos()" style="display: none;">
       <option value="">Seleccioná subgrupo...</option>
     </select>
   </div>
 
   <div class="menu" id="menu">
-    <!-- Aquí se carga el menú dinámico -->
+    <!-- Los productos se cargan dinámicamente -->
   </div>
 
   <div class="carrito">
@@ -67,36 +62,36 @@
 
   <script src="../js/main.js"></script>
   <script>
-    const productos = {
+      const productos = {
       comida: {
         "Ceviches": [
           {
             nombre: "Ceviche de salmón",
-            precio: 3600,
+            precio: 26500,
             img: "../img/ceviche.jpg",
             descripcion: "Pesca fresca cortada a cuchillo, en leche de tigre, acompañado de camote glaseado y cancha peruana."
           },
           {
-            nombre: "Ceviche de lenguado",
-            precio: 3800,
+            nombre: "Ceviche clásico",
+            precio: 17000,
             img: "../img/ceviche_mixto.jpeg",
             descripcion: "Combinación de pesca fresca y mariscos en leche de tigre."
           },
           {
             nombre: "Ceviche mixto",
-            precio: 3800,
+            precio: 19500,
             img: "../img/ceviche_mixto.jpeg",
             descripcion: "Combinación de pesca fresca y mariscos en leche de tigre."
           },
           {
             nombre: "Ceviche de lenguado y langostino",
-            precio: 3800,
+            precio: 19000,
             img: "../img/ceviche_mixto.jpeg",
             descripcion: "Combinación de pesca fresca y mariscos en leche de tigre."
           },
           {
             nombre: "Ceviche carretillero",
-            precio: 3800,
+            precio: 19500,
             img: "../img/ceviche_mixto.jpeg",
             descripcion: "Rebozados de rabas, tentáculos y langostinos"
           }
@@ -148,6 +143,33 @@
             img: "../img/ensalada_de_mar.jpg",
             descripcion: "Mix de lechuga, rúcula, tomates cherry, aros de cebolla acompañados de rabas  y langostinos en salsa nikkei."
           }
+      ],
+              "Clásicos peruanos": [
+        {
+            nombre: "Ají de gallina",
+            precio: 16500,
+            img: "../img/ensalada_de_mar.jpg",
+            descripcion: "Mix de lechuga, rúcula, tomates cherry, aros de cebolla acompañados de rabas  y langostinos en salsa nikkei."
+          },
+                  {
+            nombre: "Anticuchos de langostinos con papas rústicas y uchucuta",
+            precio: 18500,
+            img: "../img/ensalada_de_mar.jpg",
+            descripcion: "Mix de lechuga, rúcula, tomates cherry, aros de cebolla acompañados de rabas  y langostinos en salsa nikkei."
+          },
+                            {
+            nombre: "Anticuchos de lomo con papas rústicas y uchucuta",
+            precio: 18000,
+            img: "../img/ensalada_de_mar.jpg",
+            descripcion: "Mix de lechuga, rúcula, tomates cherry, aros de cebolla acompañados de rabas  y langostinos en salsa nikkei."
+          },
+                            {
+            nombre: "Bife de chorizo a la chimbotana",
+            precio: 18500,
+            img: "../img/ensalada_de_mar.jpg",
+            descripcion: "Mix de lechuga, rúcula, tomates cherry, aros de cebolla acompañados de rabas  y langostinos en salsa nikkei."
+          },
+
       ]
       },
       bebidas: {
@@ -210,33 +232,33 @@
     };
 
     function cargarSubgrupos() {
-      const categoria = document.getElementById("categoria").value;
-      const subgrupoSelect = document.getElementById("subgrupo");
-      subgrupoSelect.innerHTML = '<option value="">Seleccioná subgrupo...</option>';
+      const cat = document.getElementById("categoria").value;
+      const sub = document.getElementById("subgrupo");
+      sub.innerHTML = '<option value="">Seleccioná subgrupo...</option>';
 
-      if (categoria && productos[categoria]) {
-        Object.keys(productos[categoria]).forEach(sub => {
-          const opt = document.createElement("option");
-          opt.value = sub;
-          opt.textContent = sub;
-          subgrupoSelect.appendChild(opt);
+      if (cat && productos[cat]) {
+        Object.keys(productos[cat]).forEach(sg => {
+          const o = document.createElement("option");
+          o.value = sg;
+          o.textContent = sg;
+          sub.appendChild(o);
         });
-        subgrupoSelect.style.display = "inline-block";
+        sub.style.display = "inline-block";
       } else {
-        subgrupoSelect.style.display = "none";
+        sub.style.display = "none";
       }
 
       document.getElementById("menu").innerHTML = "";
     }
 
     function mostrarProductos() {
-      const categoria = document.getElementById("categoria").value;
-      const subgrupo = document.getElementById("subgrupo").value;
+      const cat = document.getElementById("categoria").value;
+      const sub = document.getElementById("subgrupo").value;
       const menuDiv = document.getElementById("menu");
       menuDiv.innerHTML = "";
 
-      if (categoria && subgrupo && productos[categoria][subgrupo]) {
-        productos[categoria][subgrupo].forEach(p => {
+      if (cat && sub && productos[cat][sub]) {
+        productos[cat][sub].forEach(p => {
           const item = document.createElement("div");
           item.className = "menu-item";
           item.innerHTML = `
@@ -252,7 +274,7 @@
     }
 
     document.getElementById("finalizar-btn").addEventListener("click", function () {
-      finalizarPedido("Baxar");
+      finalizarPedido("Casa Madre");
     });
   </script>
 </body>
