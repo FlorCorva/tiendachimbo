@@ -4,7 +4,7 @@
   <link rel="icon" type="image/png" href="img/favicon.png" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Casa Madre - Carta</title>
+  <title>Baxar - Carta</title>
   <link rel="stylesheet" href="../css/styles.css" />
   <style>
     .menu-selector {
@@ -29,7 +29,7 @@
   </style>
 </head>
 <body>
-  <h1>Casa Madre</h1>
+  <h1>Baxar</h1>
   <div class="hero-banner">¡Disfrutá la mejor comida en Casa Madre!</div>
   <p>Elegí tus platos favoritos y finalizá tu pedido fácilmente.</p>
 
@@ -38,7 +38,6 @@
     <select id="categoria" onchange="cargarSubgrupos()">
       <option value="">Seleccioná...</option>
       <option value="comida">Comida</option>
-      <option value="bebidas">Bebidas</option>
       <option value="pisco">Pisco</option>
     </select>
 
@@ -172,63 +171,6 @@
 
       ]
       },
-      bebidas: {
-        "Cervezas": [
-          {
-            nombre: "Corona (710ml)",
-            precio: 12000,
-            img: "../img/cerveza.jpg",
-          },
-          {
-            nombre: "Patagonia (710ml)",
-            precio: 12000,
-            img: "../img/cerveza.jpg",
-          },
-          {
-            nombre: "Andes (473ml)",
-            precio: 5500,
-            img: "../img/cerveza.jpg",
-          },
-          {
-            nombre: "Stella Artois (473ml)",
-            precio: 6500,
-            img: "../img/cerveza.jpg",
-          },
-          {
-            nombre: "Stella Artois (975ml)",
-            precio: 12000,
-            img: "../img/cerveza.jpg",
-          },
-          {
-            nombre: "Quilmes Stout (lt)",
-            precio: 12000,
-            img: "../img/cerveza.jpg",
-          },
-          {
-            nombre: "Cusqueña (330ml)",
-            precio: 10000,
-            img: "../img/cerveza.jpg",
-          },
-        ],
-        "Limonadas": [
-          {
-            nombre: "Limonada clásica",
-            precio: 1200,
-            img: "../img/limonada.jpg",
-            descripcion: "Refrescante limonada natural."
-          }
-        ]
-      },
-      pisco: {
-        "Cócteles": [
-          {
-            nombre: "Pisco Sour",
-            precio: 2500,
-            img: "../img/pisco_sour.jpg",
-            descripcion: "Clásico cóctel peruano de pisco, limón y clara de huevo."
-          }
-        ]
-      }
     };
 
     function cargarSubgrupos() {
