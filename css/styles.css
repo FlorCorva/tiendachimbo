@@ -1,5 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap");
 
+/* RESET BOX-SIZING GLOBAL */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background: url(https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1400&q=80) no-repeat center center fixed;
   background-size: cover;
@@ -38,9 +45,9 @@ p {
   gap: 2rem;
   justify-items: center;
   width: 100%;
-  box-sizing: border-box;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  overflow-x: hidden;
 }
 
 .sucursales a {
@@ -55,11 +62,6 @@ p {
   width: 100%;
   max-width: 300px;
   text-align: center;
-  
-  /* CORRECCIÓN: para evitar que el botón quede pegado al borde derecho,
-     agrego un margin-right pequeño en desktop */
-  margin-right: 0.5rem;
-  box-sizing: border-box;
 }
 
 .sucursales a:hover {
@@ -70,17 +72,17 @@ p {
   .sucursales {
     grid-template-columns: 1fr;
     justify-items: stretch;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
   }
 
   .sucursales a {
     width: 100%;
-    margin-right: 0; /* Quitar margen en móvil para que ocupe todo el ancho */
   }
 }
 
 body {
   padding: 20px;
-  box-sizing: border-box;
   overflow-x: hidden;
 }
 
