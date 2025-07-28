@@ -55,6 +55,11 @@ p {
   width: 100%;
   max-width: 300px;
   text-align: center;
+  
+  /* CORRECCIÓN: para evitar que el botón quede pegado al borde derecho,
+     agrego un margin-right pequeño en desktop */
+  margin-right: 0.5rem;
+  box-sizing: border-box;
 }
 
 .sucursales a:hover {
@@ -69,6 +74,7 @@ p {
 
   .sucursales a {
     width: 100%;
+    margin-right: 0; /* Quitar margen en móvil para que ocupe todo el ancho */
   }
 }
 
