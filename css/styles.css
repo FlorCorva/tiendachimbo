@@ -236,7 +236,7 @@ header {
 .logo {
   height: 50px;
   width: auto;
-  border-radius: 50%;
+  /* border-radius: 50%; */
 }
 
 .buscador {
@@ -320,11 +320,18 @@ footer {
   color: white;
   position: relative;
   box-sizing: border-box;
+  margin-top: 160px;
 }
 
 .footer-logo {
-  width: 50px;
+  width: 150px;   /* ajustá el tamaño que quieras */
+  height: auto;   /* mantiene proporción */
+}
+
+.footer-socials img {
+  width: 40px;    /* tamaño de los íconos */
   height: auto;
+  margin: 0 5px;  /* un poquito de espacio entre ellos */
 }
 
 .categoria {
