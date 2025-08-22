@@ -237,7 +237,7 @@ header {
 .logo {
   height: 50px;
   width: auto;
-  /* border-radius: 50%; */
+  border-radius: 40%;
 }
 
 .buscador {
@@ -283,7 +283,7 @@ header {
   background-image: url('../img/fondo.png');
   background-repeat: repeat;
   background-position: center;
-  background-size: 200px 200px;
+  background-size: contain;
 }
 
 .bienvenida-img {
