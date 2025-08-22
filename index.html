@@ -37,7 +37,7 @@
     }
 
     .btn-pedido {
-      background-color: #ff595e;
+      background-color: #E1281D;
       color: white;
       border: none;
       padding: 1rem 2rem;
@@ -48,12 +48,12 @@
     }
 
     .btn-pedido:hover {
-      background-color: #e14c51;
+      background-color: #E1281D;
     }
 
     header {
       width: 100%;
-      background-color: #ff595e;
+      background-color: #E1281D;
       color: white;
       padding: 1.5rem 0;
       text-align: center;
@@ -114,7 +114,7 @@
       display: inline-block;
       margin-bottom: 1.5rem;
       padding: 0.6rem 1.5rem;
-      background-color: #ff595e;
+      background-color: #E1281D;
       color: white;
       text-decoration: none;
       border-radius: 8px;
@@ -123,7 +123,7 @@
     }
 
     .sucursal-card a:hover {
-      background-color: #e14c51;
+      background-color: #E1281D;
     }
 
     .buscador {
@@ -141,8 +141,16 @@
 <body>
   <div id="pantalla-bienvenida" class="bienvenida">
     <img src="img/bienvenidos.png" alt="Bienvenidos Amigos" class="bienvenida-img" />
+
+    <!-- Botón original -->
     <button onclick="mostrarContenido()" class="btn-pedido">Hacé tu pedido</button>
+
+    <!-- Botón nuevo que abre WhatsApp -->
+    <a href="https://wa.me/5492216275662?text=Hola%20quiero%20hacer%20un%20pedido" target="_blank">
+      <button class="btn-pedido">Consultá por tu evento</button>
+    </a>
   </div>
+</body>
 
   <div id="contenido-principal" style="display: none; width: 100%;">
     <header>
@@ -158,18 +166,21 @@
           <h3>City Bell</h3>
           <p>Pedidos para la zona norte. Comida peruana auténtica y fresca.</p>
           <a href="sucursales/citybell.html">Ver menú</a>
+          <a href="https://wa.me/5492215980622">Reservá tu lugar</a>
         </div>
         <div class="sucursal-card">
           <img src="img/centro.jpeg" alt="Sucursal Centro">
           <h3>Baxar</h3>
           <p>Ubicados en el corazón de La Plata. Delicias al paso o para disfrutar en casa.</p>
           <a href="sucursales/centro.html">Ver menú</a>
+          <a href="https://wa.me/5492215980622">Reservá tu lugar</a>
         </div>
         <div class="sucursal-card">
           <img src="img/tolosa.jpeg" alt="Sucursal Tolosa">
           <h3>Casa Madre</h3>
           <p>Pedidos para la zona este. Los mejores sabores tu barrio.</p>
           <a href="sucursales/casamadre.html">Ver menú</a>
+          <a href="https://wa.me/5492215980622">Reservá tu lugar</a>
         </div>
       </div>
     </main>

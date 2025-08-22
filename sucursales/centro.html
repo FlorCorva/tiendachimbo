@@ -38,6 +38,7 @@
     <select id="categoria" onchange="cargarSubgrupos()">
       <option value="">Seleccioná...</option>
       <option value="comida">Comida</option>
+      <option value="promosespeciales">Promos Especiales</option>
     </select>
 
     <select id="subgrupo" onchange="mostrarProductos()" style="display: none;">
@@ -147,24 +148,6 @@
             img: "../img/aji_de_gallina.jpg",
             descripcion: "Pollo desmenuzado en una salsa cremosa de ají amarillo, nueces y queso, servido con arroz, papas huevo y aceitunas."
           },
-                  {
-            nombre: "Anticuchos de langostinos con papas rústicas y uchucuta",
-            precio: 18500,
-            img: "../img/anticuchos_de_carne.jpg",
-            descripcion: "Brochetas en salsa anticuchera acompañado con papas a la provenzal, chorlito parrillero y salsa huancaína."
-          },
-                            {
-            nombre: "Anticuchos de lomo con papas rústicas y uchucuta",
-            precio: 18000,
-            img: "../img/anticuchos_de_carne.jpg",
-            descripcion: "Brochetas en salsa anticuchera acompañado con papas a la provenzal, chorlito parrillero y salsa huancaína."
-          },
-                            {
-            nombre: "Bife de chorizo a la chimbotana",
-            precio: 18500,
-            img: "../img/bife_chimbo.jpg",
-            descripcion: "Acompañado con fritas, arroz, ensalada, salchicha y huevo frito."
-          },
                                       {
             nombre: "Chaufa de arroz o tallarines salteados - Carne",
             precio: 16500,
@@ -202,12 +185,6 @@
             img: "../img/lomo_saltado.jpeg",
             descripcion: "Trozos de lomo, cebolla, morrón, tomate y cilantro, salteados al wok con salsa de soja y ostión, acompañado de papas fritas y arroz."
           },
-                                                {
-            nombre: "Pollo Saltado",
-            precio: 16500,
-            img: "../img/lomo_saltado.jpeg",
-            descripcion: "Trozos de pollo, cebolla, morrón, tomate y cilantro, salteados al wok con salsa de soja y ostión, acompañado de papas fritas y arroz."
-          },
                                                           {
             nombre: "Risotto a la huancaína con bife de chorizo",
             precio: 18000,
@@ -231,16 +208,47 @@
             precio: 27000,
             img: "../img/risotto_con_bife.jpg",
             descripcion: "Arroz cremoso con salsa huancaína y queso parmesano."
+          }
+
+      ],
+      "Grill Anticuchero": [
+        {
+            nombre: "Anticuchos de langostinos con papas rústicas y uchucuta",
+            precio: 18500,
+            img: "../img/anticuchos_de_carne.jpg",
+            descripcion: "Brochetas en salsa anticuchera acompañado con papas a la provenzal, chorlito parrillero y salsa huancaína."
           },
+                            {
+            nombre: "Anticuchos de lomo con papas rústicas y uchucuta",
+            precio: 18000,
+            img: "../img/anticuchos_de_carne.jpg",
+            descripcion: "Brochetas en salsa anticuchera acompañado con papas a la provenzal, chorlito parrillero y salsa huancaína."
+          },
+                                      {
+            nombre: "Bife de chorizo a la chimbotana",
+            precio: 18500,
+            img: "../img/bife_chimbo.jpg",
+            descripcion: "Acompañado con fritas, arroz, ensalada, salchicha y huevo frito."
+          },
+                                                          {
+            nombre: "Pollo Saltado",
+            precio: 16500,
+            img: "../img/lomo_saltado.jpeg",
+            descripcion: "Trozos de pollo, cebolla, morrón, tomate y cilantro, salteados al wok con salsa de soja y ostión, acompañado de papas fritas y arroz."
+          }
+      ],
+
+            "Tiradito": [
                                                                               {
             nombre: "Tiradito de lenguado, mango y maracuyá",
             precio: 14000,
             img: "../img/tiradito.jpg",
             descripcion: "Sashimis de lenguado o salmón, marinados en salsa a elección, acompañado de chalaquita, maíz andino y cholo"
           },
-
-      ]
+      ],
       },
+      promosespeciales: {
+        },
     };
 
     function cargarSubgrupos() {
