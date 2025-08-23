@@ -239,7 +239,7 @@ header {
   width: auto;
   /* border-radius: 2%;
   background-color: #fbfbfb; */
-  filter: drop-shadow(0 0 2px white);
+  filter: drop-shadow(0 0 2px rgb(255, 255, 255));
 }
 
 .buscador {
@@ -329,7 +329,7 @@ footer {
 .footer-logo {
   width: 150px;   /* ajustá el tamaño que quieras */
   height: auto;   /* mantiene proporción */
-  filter: drop-shadow(0 0 2px white);
+  filter: drop-shadow(0 0 2px rgb(254, 254, 254));
 }
 
 .footer-socials img {
