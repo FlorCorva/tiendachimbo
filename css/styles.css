@@ -237,7 +237,9 @@ header {
 .logo {
   height: 50px;
   width: auto;
-  border-radius: 40%;
+  /* border-radius: 2%;
+  background-color: #fbfbfb; */
+  filter: drop-shadow(0 0 2px white);
 }
 
 .buscador {
@@ -327,6 +329,7 @@ footer {
 .footer-logo {
   width: 150px;   /* ajustá el tamaño que quieras */
   height: auto;   /* mantiene proporción */
+  filter: drop-shadow(0 0 2px white);
 }
 
 .footer-socials img {
