@@ -59,7 +59,7 @@ function finalizarPedido() {
   };
 
   const numeroPedido = generarNumeroPedido();
-  let mensaje = `¡Hola! Quiero abonar mi pedido en la sucursal ${sucursal}.\nNúmero de pedido: ${numeroPedido}\n`;
+  let mensaje = `¡Hola! Quiero abonar mi pedido en la sucursal ${sucursal}.\nNúmero de pedido: ${numeroPedido}\n. En caso de solicitar pedido por delivery, por favor indicanos domicilio.`;
   let total = 0;
 
   carrito.forEach((item) => {
